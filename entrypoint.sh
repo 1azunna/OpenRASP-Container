@@ -1,6 +1,6 @@
 #!bin/bash
 
-./rasp-coud -d
+./rasp-cloud -d
 #check if the log file exists
 FILE=/rasp/logs/api/agent-cloud.log
 if [ -f "$FILE" ]; then

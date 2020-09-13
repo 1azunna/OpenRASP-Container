@@ -18,11 +18,10 @@ RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.t
 
 WORKDIR /rasp
 COPY config/app.conf conf/app.conf
-COPY entrypoint.sh /entrypoint.sh
 
 EXPOSE 8086
 
-CMD ["sh","entrypoint.sh"]
+CMD ["./rasp-cloud","-d"]
 
 # Make sure app runs as a non-root user
 USER openrasp
