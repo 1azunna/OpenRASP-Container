@@ -5,12 +5,10 @@ services:
       dockerfile: Dockerfile
       context: .
     container_name: openrasp
-    env_file:
-          - .env
     ports: 
       - 8086:8086
-    networks:
-      - rasp
+    depends_on:
+      - mongo
   elasticsearch: 
     image: "elasticsearch:6.8.12"
     container_name: elasticsearch
@@ -25,8 +23,8 @@ services:
       - esdata:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
-    networks:
-      - rasp
+    # networks:
+    #   - rasp
   mongo:
     image: "mongo:latest"
     container_name: mongodb
@@ -44,15 +42,14 @@ services:
       - ./mongo-volume/:/data/db/
     ports:
             - "27017:27017"
-    networks:
-      - rasp
+    # networks:
+    #   - rasp
     # command: ["-f", "/etc/mongod.conf"]
     
 volumes:
   esdata:
     driver: local
 
-
-networks:
-  rasp:
-    driver: bridge
+# networks:
+#   rasp:
+#     driver: bridge
