@@ -9,8 +9,7 @@ RUN useradd --create-home openrasp \
     && rm -f /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata
 
-# Make sure app runs as a non-root user
-USER openrasp
+
 
 RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.tar.gz \
     && tar -xvf rasp-cloud.tar.gz \
@@ -19,3 +18,6 @@ RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.t
 
 EXPOSE 8086
 CMD ["./rasp-cloud","-d"]
+
+# Make sure app runs as a non-root user
+USER openrasp
