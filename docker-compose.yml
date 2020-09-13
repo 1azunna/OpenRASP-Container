@@ -3,6 +3,7 @@ services:
   server:
     build:
       dockerfile: Dockerfile
+      context: .
     ports: 
       - 8086:8086
     networks:
