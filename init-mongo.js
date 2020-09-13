@@ -1,6 +1,6 @@
 db.createUser(
     {
-        user : "openrasp",
+        user: "${MONGO_INITDB_USER}",
         pwd : "${MONGO_INITDB_PASSWORD}",
         roles : [
             {

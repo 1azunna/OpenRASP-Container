@@ -14,8 +14,10 @@ RUN useradd --create-home openrasp \
 
 RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.tar.gz \
     && tar -xvf rasp-cloud.tar.gz \
-    && rm rasp-cloud.tar.gz \
-    && cd rasp*
+    && rm rasp-cloud.tar.gz 
+
+RUN cd rasp-cloud*
+COPY config/app.conf conf/app.conf
 
 EXPOSE 8086
 CMD ["./rasp-cloud","-d"]
