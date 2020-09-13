@@ -39,7 +39,8 @@ services:
       - mongo-volume/data/db/:/data/db/
     ports:
             - "27017-27019:27017-27019"
-    command: ["-f", "/etc/mongod.conf"]
+    networks:
+      - rasp
     
 volumes:
   esdata:
