@@ -18,6 +18,7 @@ RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.t
     && mv rasp* rasp
 
 # Forward agent logs to docker log collector
+RUN touch /rasp/logs/api/agent-cloud.log 
 RUN ln -sf /dev/stdout /rasp/logs/api/agent-cloud.log 
 
 WORKDIR /rasp
