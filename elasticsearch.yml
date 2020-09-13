@@ -1,5 +1,5 @@
 cluster.name: openrasp
-discovery.type: singlenode
+discovery.type: single-node
 bootstrap.memory_lock: true
 network.host: 0.0.0.0
 xpack.security.enabled: false
