@@ -11,22 +11,18 @@ RUN useradd --create-home openrasp \
     && dpkg-reconfigure -f noninteractive tzdata
 
 
-
 RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.tar.gz \
     && tar -xvf rasp-cloud.tar.gz \
     && rm rasp-cloud.tar.gz \
     && mv rasp* rasp
 
-# Forward agent logs to docker log collector
-RUN touch /rasp/logs/api/agent-cloud.log 
-RUN ln -sf /dev/stdout /rasp/logs/api/agent-cloud.log 
-
 WORKDIR /rasp
 COPY config/app.conf conf/app.conf
+COPY entrypoint.sh /entrypoint.sh
 
 EXPOSE 8086
 
-CMD ["./rasp-cloud","-d"]
+CMD ["sh","entrypoint.sh"]
 
 # Make sure app runs as a non-root user
 USER openrasp
