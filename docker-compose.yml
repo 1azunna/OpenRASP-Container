@@ -37,7 +37,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
     volumes:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-      - mongo-volume/data/db/:/data/db/
+      - ./mongo-volume/:/data/db/
     ports:
             - "27017-27019:27017-27019"
     networks:
@@ -46,8 +46,7 @@ services:
 volumes:
   esdata:
     driver: local
-  mongo-volume:
-    driver: local
+
 
 networks:
   rasp:
