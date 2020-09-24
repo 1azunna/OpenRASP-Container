@@ -19,8 +19,7 @@ RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.t
 WORKDIR /rasp
 COPY config/app.conf conf/app.conf
 
-RUN | # Forward agent logs to docker log collector \
-        FILE="/rasp/logs/api/agent-cloud.log"; \
+RUN     FILE="/rasp/logs/api/agent-cloud.log"; \
         if [ -f "/rasp/logs/api/agent-cloud.log" ]; then \
                 ln -sf /dev/stdout /rasp/logs/api/agent-cloud.log; \
             else \
