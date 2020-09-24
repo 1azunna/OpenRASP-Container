@@ -15,7 +15,10 @@ services:
       - elasticsearch
 
   elasticsearch: 
-    image: elasticsearch:6.8.12
+    # image: elasticsearch:6.8.12
+    build:
+      dockerfile: Dockerfile
+      context: ./elasticsearch/
     container_name: elasticsearch
     env_file: 
       - .env
