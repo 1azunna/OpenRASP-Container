@@ -17,11 +17,9 @@ RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.t
     && mv rasp* rasp
 
 WORKDIR /rasp
-COPY config/app.conf conf/app.conf
+RUN mv conf/app.conf conf/app.conf.save
 
 EXPOSE 8086
-
-CMD ["./rasp-cloud","-d"]
 
 # Make sure container runs as a non-root user
 USER openrasp

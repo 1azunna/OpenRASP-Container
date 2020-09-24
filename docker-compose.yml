@@ -1,20 +1,27 @@
 version: '3'
 services: 
-  server:
+  rasp_cloud:
     build:
       dockerfile: Dockerfile
       context: .
     container_name: openrasp
     volumes: 
       - rasp_data:/rasp
+      - ./config/app.conf:/rasp/conf/app.conf
     ports: 
       - 8086:8086
+    command: ["./rasp-cloud","-d"]
     depends_on:
       - mongo
       - elasticsearch
+
   elasticsearch: 
-    image: "elasticsearch:6.8.12"
+    build: 
+      dockerfile: Dockerfile
+      context: ./elasticsearch/
     container_name: elasticsearch
+    env_file: 
+      - .env
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
@@ -40,7 +47,7 @@ services:
     volumes:
       - ./mongodb/create-user.sh:/docker-entrypoint-initdb.d/create-user.sh
       - ./mongodb/mongod.conf:/etc/mongod.conf
-      - ./mongo-volume/:/data/db/
+      - mongo-volume/:/data/db/
     ports:
       - "27017:27017"
     command: ["-f", "/etc/mongod.conf"]
@@ -49,4 +56,6 @@ volumes:
   esdata:
     driver: local
   rasp_data:
+    driver: local
+  mongo-volume:
     driver: local
