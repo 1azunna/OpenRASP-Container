@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
       context: .
     container_name: openrasp
+    volumes: 
+      - rasp_data:/raps
     ports: 
       - 8086:8086
     depends_on:
@@ -45,6 +47,8 @@ services:
     
 volumes:
   esdata:
+    driver: local
+  rasp_data:
     driver: local
 
 # networks:
