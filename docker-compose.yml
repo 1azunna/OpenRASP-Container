@@ -26,10 +26,10 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - ./elasticsearch/create_user.sh:/usr/share/elasticsearch/create_user.sh
+      # - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      # - ./elasticsearch/create_user.sh:/usr/share/elasticsearch/create_user.sh
       - esdata:/usr/share/elasticsearch/data
-    command: bash -c "chmod +x create_user.sh && ./create_user.sh"
+    command: ["./create_user.sh"]
     # command: ['sysctl', '-w', 'vm.max_map_count=262144']
     ports:
       - 9200:9200
