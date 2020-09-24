@@ -6,7 +6,6 @@ services:
       context: .
     container_name: openrasp
     volumes: 
-      - rasp_data:/rasp
       - ./config/app.conf:/rasp/conf/app.conf
     ports: 
       - 8086:8086
