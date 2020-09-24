@@ -6,7 +6,7 @@ services:
       context: .
     container_name: openrasp
     volumes: 
-      - rasp_data:/raps
+      - rasp_data:/rasp
     ports: 
       - 8086:8086
     depends_on:
@@ -50,7 +50,3 @@ volumes:
     driver: local
   rasp_data:
     driver: local
-
-# networks:
-#   rasp:
-#     driver: bridge
