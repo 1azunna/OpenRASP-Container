@@ -25,28 +25,23 @@ services:
     # command: ['sysctl', '-w', 'vm.max_map_count=262144']
     ports:
       - 9200:9200
-    # networks:
-    #   - rasp
   mongo:
     image: "mongo:latest"
     container_name: mongodb
     hostname: mongodb
     env_file:
-          - .env
-    environment:  
-      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - .env
+    environment:
+            MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+            MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
     volumes:
-      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-      # - ./mongodb/create-user.sh:/docker-entrypoint-initdb.d/create-user.sh
-      # - ./mongodb/mongod.conf:/etc/mongod.conf
+      - ./mongodb/create-user.sh:/docker-entrypoint-initdb.d/create-user.sh
+      - ./mongodb/mongod.conf:/etc/mongod.conf
       - ./mongo-volume/:/data/db/
     ports:
-            - "27017:27017"
-    # networks:
-    #   - rasp
-    # command: ["-f", "/etc/mongod.conf"]
+      - "27017:27017"
+    command: ["-f", "/etc/mongod.conf"]
     
 volumes:
   esdata:

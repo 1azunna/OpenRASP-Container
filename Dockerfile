@@ -19,9 +19,19 @@ RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.t
 WORKDIR /rasp
 COPY config/app.conf conf/app.conf
 
+RUN | # Forward agent logs to docker log collector \
+        FILE="/rasp/logs/api/agent-cloud.log"; \
+        if [ -f "/rasp/logs/api/agent-cloud.log" ]; then \
+                ln -sf /dev/stdout /rasp/logs/api/agent-cloud.log; \
+            else \
+                mkdir /rasp/logs/api && touch agent-cloud.log; \
+                ln -sf /dev/stdout /rasp/logs/api/agent-cloud.log; \
+        fi
+
+
 EXPOSE 8086
 
 CMD ["./rasp-cloud","-d"]
 
-# Make sure app runs as a non-root user
+# Make sure container runs as a non-root user
 USER openrasp
