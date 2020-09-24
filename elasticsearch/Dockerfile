@@ -6,4 +6,4 @@ COPY ./create_user.sh create_user.sh
 
 RUN chmod +x create_user.sh
 
-CMD ['./create_user.sh']
+CMD ["./create_user.sh"]
