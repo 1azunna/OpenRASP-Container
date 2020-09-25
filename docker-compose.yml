@@ -5,8 +5,8 @@ services:
       dockerfile: Dockerfile
       context: .
     container_name: openrasp
-    volumes: 
-      - ./config/app.conf:/rasp/conf/app.conf
+    # volumes: 
+    #   - ./config/app.conf:/rasp/conf/app.conf
     ports: 
       - 8086:8086
     command: bash -c "./rasp-cloud -d"
