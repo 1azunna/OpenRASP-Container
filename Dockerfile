@@ -11,10 +11,11 @@ RUN useradd --create-home openrasp \
     && dpkg-reconfigure -f noninteractive tzdata
 
 
-RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.tar.gz \
-    && tar -xvf rasp-cloud.tar.gz \
-    && rm rasp-cloud.tar.gz \
-    && mv rasp* rasp
+# RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.tar.gz \
+#     && tar -xvf rasp-cloud.tar.gz \
+#     && rm rasp-cloud.tar.gz \
+#     && mv rasp* rasp
+COPY rasp-cloud-2020-09-04 rasp
 
 WORKDIR /rasp
 RUN mv conf/app.conf conf/app.conf.save

@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services: 
   rasp_cloud:
     build:
@@ -9,7 +9,6 @@ services:
       - ./config/app.conf:/rasp/conf/app.conf
     ports: 
       - 8086:8086
-    stdin_open: true
     tty: true
     depends_on:
       - elasticsearch
