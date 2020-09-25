@@ -7,7 +7,6 @@ services:
     container_name: openrasp
     volumes: 
       - ./config/app.conf:/rasp/conf/app.conf
-      - ./wait-for-it.sh:/rasp/wait-for-it.sh
     ports: 
       - 8086:8086
     stdin_open: true

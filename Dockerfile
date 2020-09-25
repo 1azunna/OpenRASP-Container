@@ -19,7 +19,8 @@ RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.t
 WORKDIR /rasp
 RUN mv conf/app.conf conf/app.conf.save
 COPY start.sh start.sh    
-RUN chmod +x start.sh && chown -hR openrasp /rasp
+COPY wait-for-it.sh wait-for-it.sh
+RUN chmod +x start.sh wait-for-it.sh && chown -hR openrasp /rasp
 
 EXPOSE 8086
 
