@@ -18,6 +18,7 @@ RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.t
 
 WORKDIR /rasp
 RUN mv conf/app.conf conf/app.conf.save
+COPY config/app.conf /rasp/conf/app.conf
 
 EXPOSE 8086
 
