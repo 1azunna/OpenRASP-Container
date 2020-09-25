@@ -5,7 +5,7 @@ LABEL maintainer "Azunna Ikonne <ikonne@gmail.com>"
 RUN useradd --create-home openrasp \
     && apt update \
     && apt upgrade -y \
-    && apt install wget tar -y \
+    && apt install wget tar curl -y \
     && echo "Africa/Lagos" > /etc/timezone \
     && rm -f /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata
