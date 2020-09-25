@@ -18,15 +18,12 @@ RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.t
 
 WORKDIR /rasp
 RUN mv conf/app.conf conf/app.conf.save
-COPY start.sh start.sh  
-COPY wait-for-it.sh wait-for-it.sh  
-RUN chmod +x start.sh wait-for-it.sh && chown -hR openrasp /rasp
+COPY start.sh start.sh    
+RUN chmod +x start.sh && chown -hR openrasp /rasp
 
 EXPOSE 8086
 
 # Make sure container runs as a non-root user
 USER openrasp
-
-ENTRYPOINT [ "./wait-fot-it.sh", "mongo:27017", "elasticsearch:9200", "--", "./start.sh" ]
 
 HEALTHCHECK CMD curl --fail http://localhost:8086/ || exit 1
