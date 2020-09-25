@@ -24,5 +24,6 @@ RUN chmod +x start.sh && chown -hR openrasp /rasp
 
 EXPOSE 8086
 
+ENTRYPOINT [ "./start.sh" ]
 # Make sure container runs as a non-root user
 USER openrasp
