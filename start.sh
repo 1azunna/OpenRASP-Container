@@ -21,10 +21,10 @@ term_handler() {
 trap 'kill ${!}; my_handler' SIGUSR1
 trap 'kill ${!}; term_handler' SIGTERM
 
-./rasp-cloud -d && sleep 15s; ln -sf /dev/stdout /rasp/logs/api/agent-cloud.log &
+./rasp-cloud -d &
 pid="$!"
 # wait forever
 while true
 do
-  tail -f /dev/stdout & wait ${!}
+  tail -f /rasp/logs/api/agent-cloud.log & wait ${!}
 done

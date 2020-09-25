@@ -13,7 +13,8 @@ services:
     tty: true
     depends_on:
       - elasticsearch
-    entrypoint: ["./wait-for-it.sh", "-t", "0", "mongo:27017", "elasticsearch:9200", "--", "./start.sh"]
+    entrypoint: ["./wait-for-it.sh", "-t", "0", "mongo:27017", "elasticsearch:9200", "--"]
+    command: bash -c "./start.sh"
     links:
       - elasticsearch
       - mongo
