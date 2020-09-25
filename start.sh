@@ -3,11 +3,10 @@
 mongo_check () {
 while true;
 do
-  curl mongo:27017
+  curl -sS mongo:27017
   if [ $? -eq 0 ]
   then 
     echo OK
-    exit 0
   fi
 done
 }
@@ -15,11 +14,10 @@ done
 elastic_check () {
 while true;
 do
-  curl elasticsearch:9200
+  curl -sS elasticsearch:9200
   if [ $? -eq 0 ]
   then 
     echo OK
-    exit 0
   fi
 done
 }
