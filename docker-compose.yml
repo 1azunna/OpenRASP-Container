@@ -7,12 +7,14 @@ services:
     container_name: openrasp
     volumes: 
       - ./config/app.conf:/rasp/conf/app.conf
+      - ./wait-for-it.sh:/rasp/wait-for-it.sh
     ports: 
       - 8086:8086
     stdin_open: true
     tty: true
     depends_on:
       - elasticsearch
+    entrypoint: ["./wait-fot-it.sh", "mongo:27017", "elasticsearch:9200", "--", "./start.sh"]
     links:
       - elasticsearch
       - mongo

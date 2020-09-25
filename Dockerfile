@@ -18,12 +18,14 @@ RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.t
 
 WORKDIR /rasp
 RUN mv conf/app.conf conf/app.conf.save
-# COPY config/app.conf /rasp/conf/app.conf
 COPY start.sh start.sh    
 RUN chmod +x start.sh && chown -hR openrasp /rasp
 
 EXPOSE 8086
 
+
 ENTRYPOINT [ "./start.sh" ]
 # Make sure container runs as a non-root user
 USER openrasp
+
+HEALTHCHECK CMD curl --fail http://localhost:8086/ || exit 1

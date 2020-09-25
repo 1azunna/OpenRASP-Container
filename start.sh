@@ -2,29 +2,29 @@
 set -x
 pid=0
 
-mongo_check () {
-while true;
-do
-  curl -s mongo:27017
-  if [ $? -eq 0 ];
-  then 
-    echo OK
-    break
-  fi
-done
-}
+# mongo_check () {
+# while true;
+# do
+#   curl -s mongo:27017
+#   if [ $? -eq 0 ];
+#   then 
+#     echo OK
+#     break
+#   fi
+# done
+# }
 
-elastic_check () {
-while true;
-do
-  curl -s elasticsearch:9200
-  if [ $? -eq 0 ];
-  then 
-    echo OK
-    break
-  fi
-done
-}
+# elastic_check () {
+# while true;
+# do
+#   curl -s elasticsearch:9200
+#   if [ $? -eq 0 ];
+#   then 
+#     echo OK
+#     break
+#   fi
+# done
+# }
 
 
 # SIGUSR1-handler
@@ -46,18 +46,11 @@ term_handler() {
 trap 'kill ${!}; my_handler' SIGUSR1
 trap 'kill ${!}; term_handler' SIGTERM
 
-mongo_check
-elastic_check
 ./rasp-cloud -d & 
 pid="$!"
-if [ $? -eq 0 ];
-  then 
-    sleep 10s
-    ln -sf /dev/stdout /rasp/logs/api/agent-cloud.log
-fi
-
 # wait forever
 while true
 do
+  ln -sf /dev/stdout /rasp/logs/api/agent-cloud.log
   tail -f /dev/null & wait ${!}
 done
