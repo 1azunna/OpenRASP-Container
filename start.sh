@@ -27,10 +27,17 @@ done
 mongo_check
 elastic_check
 
-./rasp-cloud -d
+trap 'kill -TERM $PID' TERM INT
+./rasp-cloud -d &
+PID=$!
+wait $PID
+trap - TERM INT
+wait $PID
+EXIT_STATUS=$?
+
 if [ $? -eq 0 ];
   then 
-    sleep 30s
+    sleep 10s
     ln -sf /dev/stdout /rasp/logs/api/agent-cloud.log
 fi
 
