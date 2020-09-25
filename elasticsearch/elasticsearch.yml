@@ -1,7 +1,7 @@
 cluster.name: openrasp
 discovery.type: single-node
 bootstrap.memory_lock: true
-network.host: 127.0.0.1
+network.host: 0.0.0.0
 http.port: 9200
 xpack.security.enabled: true
 xpack.security.audit.enabled: true
