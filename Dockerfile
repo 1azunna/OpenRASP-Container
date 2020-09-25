@@ -27,4 +27,6 @@ EXPOSE 8086
 # Make sure container runs as a non-root user
 USER openrasp
 
+ENTRYPOINT [ "./wait-fot-it.sh", "mongo:27017", "elasticsearch:9200", "--", "./start.sh" ]
+
 HEALTHCHECK CMD curl --fail http://localhost:8086/ || exit 1
