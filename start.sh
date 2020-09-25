@@ -26,8 +26,6 @@ do
 done
 }
 
-mongo_check
-elastic_check
 
 # SIGUSR1-handler
 my_handler() {
@@ -48,6 +46,8 @@ term_handler() {
 trap 'kill ${!}; my_handler' SIGUSR1
 trap 'kill ${!}; term_handler' SIGTERM
 
+mongo_check
+elastic_check
 ./rasp-cloud -d & 
 pid="$!"
 if [ $? -eq 0 ];
