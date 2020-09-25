@@ -7,6 +7,7 @@ do
   if [ $? -eq 0 ]
   then 
     echo OK
+    break
   fi
 done
 }
@@ -18,6 +19,7 @@ do
   if [ $? -eq 0 ]
   then 
     echo OK
+    break
   fi
 done
 }
