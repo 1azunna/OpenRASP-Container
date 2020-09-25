@@ -9,7 +9,7 @@ services:
     #   - ./config/app.conf:/rasp/conf/app.conf
     ports: 
       - 8086:8086
-    command: bash -c "./rasp-cloud -d"
+    command: bash -c "./start.sh"
     depends_on:
       - elasticsearch
     links:
