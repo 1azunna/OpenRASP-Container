@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services: 
   rasp_cloud:
     build:
@@ -9,11 +9,10 @@ services:
       - ./config/app.conf:/rasp/conf/app.conf
     ports: 
       - 8086:8086
-    stdin_open: true
     tty: true
     depends_on:
       - elasticsearch
-    entrypoint: ["./wait-for-it.sh", "-t", "0", "mongo:27017", "elasticsearch:9200", "--", "./start.sh"]
+    entrypoint: ["/bin/bash", "start.sh"]
     links:
       - elasticsearch
       - mongo

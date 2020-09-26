@@ -1,30 +1,7 @@
 #!/bin/bash
 set -x
-pid=0
+#!/bin/bash
 
-# SIGUSR1-handler
-my_handler() {
-  echo "my_handler"
-}
+/bin/bash /etc/init.d/rasp-cloud.sh start
 
-# SIGTERM-handler
-term_handler() {
-  if [ $pid -ne 0 ]; then
-    kill -SIGTERM "$pid"
-    wait "$pid"
-  fi
-  exit 143; # 128 + 15 -- SIGTERM
-}
-
-# setup handlers
-# on callback, kill the last background process, which is `tail -f /dev/null` and execute the specified handler
-trap 'kill ${!}; my_handler' SIGUSR1
-trap 'kill ${!}; term_handler' SIGTERM
-
-./rasp-cloud -d && sleep 15s; ln -sf /dev/stdout /rasp/logs/api/agent-cloud.log &
-pid="$!"
-# wait forever
-while true
-do
-  tail -f /dev/stdout & wait ${!}
-done
+/bin/bash
