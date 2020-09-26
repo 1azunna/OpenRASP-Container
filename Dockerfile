@@ -21,7 +21,7 @@ WORKDIR /rasp
 RUN mv conf/app.conf conf/app.conf.save
 COPY start.sh start.sh    
 COPY rasp-cloud.sh /etc/init.d/rasp-cloud.sh
-RUN chmod +x start.sh rasp-cloud.sh && chown -hR openrasp /rasp
+RUN chmod +x start.sh /etc/init.d/rasp-cloud.sh && chown -hR openrasp /rasp
 
 EXPOSE 8086
 
