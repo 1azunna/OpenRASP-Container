@@ -244,7 +244,7 @@ var algorithmConfig = {
         action:'block'
     },
     // SSRF-It is forbidden to use curl to read content like file:///etc/passwd, php://filter/XXXX
-        ssrf_protocol: {
+    ssrf_protocol: {
         name:      '算法5 - 拦截 php:// 等异常协议',
         action:    'block',
         protocols: [
@@ -2485,7 +2485,8 @@ plugin.register('command', function (params, context) {
         }
     }
 
-// Starting from v0.31, when the command execution comes from a non-HTTP request, we will also detect deserialization attacks// But normal command execution should not be intercepted, so add a context.url check here
+// Starting from v0.31, when the command execution comes from a non-HTTP request, we will also detect deserialization attacks
+// But normal command execution should not be intercepted, so add a context.url check here
     if (! context.url) {
         return clean
     }
