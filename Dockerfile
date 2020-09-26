@@ -20,8 +20,8 @@ COPY rasp-cloud-2020-09-04 rasp
 WORKDIR /rasp
 RUN mv conf/app.conf conf/app.conf.save
 COPY start.sh start.sh    
-COPY wait-for-it.sh wait-for-it.sh
-RUN chmod +x start.sh wait-for-it.sh && chown -hR openrasp /rasp
+COPY rasp-cloud.sh /etc/init.d/rasp-cloud.sh
+RUN chmod +x start.sh rasp-cloud.sh && chown -hR openrasp /rasp
 
 EXPOSE 8086
 
