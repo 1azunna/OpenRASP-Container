@@ -1,5 +1,5 @@
 # OpenRASP-Container
-Docker compose for openrasp cloud management background (Translated-to-English)
+Openrasp cloud management background (Translated-to-English)
 
 ## Installation
 To build the containers:
