@@ -1,11 +1,12 @@
 FROM openjdk:11-jre-slim
-LABEL maintainer "Azunna Ikonne <ikonne@gmail.com>"
+LABEL maintainer "Azunna Ikonne <ikonnea@gmail.com>"
 
 # Perform package upgrades and set timezone
+# hadolint ignore=DL3008
 RUN useradd --create-home openrasp \
-    && apt update \
-    && apt upgrade -y \
-    && apt install wget tar curl -y \
+    && apt-get update \
+    && apt-get install --no-install-recommends wget tar curl -y \
+    && rm /var/lib/apt/lists/* \
     && echo "Africa/Lagos" > /etc/timezone \
     && rm -f /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata
@@ -28,4 +29,5 @@ EXPOSE 8086
 # Make sure container runs as a non-root user
 USER openrasp
 
-HEALTHCHECK CMD curl --fail http://localhost:8086/ || exit 1
+HEALTHCHECK  --interval=30s --timeout=5s \
+    CMD curl --fail http://localhost:8086/ || exit 1 
