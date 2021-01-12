@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services: 
   rasp_cloud:
     build:
@@ -9,20 +9,16 @@ services:
       - ./config/app.conf:/rasp/conf/app.conf
     ports: 
       - 8086:8086
-    stdin_open: true
     tty: true
     depends_on:
       - elasticsearch
-    entrypoint: ["./wait-for-it.sh", "mongo:27017", "elasticsearch:9200", "--", "./start.sh"]
+    entrypoint: ["/bin/bash", "start.sh"]
     links:
       - elasticsearch
       - mongo
 
   elasticsearch: 
     image: elasticsearch:6.8.12
-    # build:
-    #   dockerfile: Dockerfile
-    #   context: ./elasticsearch/
     container_name: elasticsearch
     env_file: 
       - .env
@@ -34,14 +30,12 @@ services:
         hard: -1
     volumes:
       - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      # - ./elasticsearch/create_user.sh:/usr/share/elasticsearch/create_user.sh
       - esdata:/usr/share/elasticsearch/data
-    # command: ["./create_user.sh"]
-    # command: ['sysctl', '-w', 'vm.max_map_count=262144']
     ports:
       - 9200:9200
     depends_on:
       - mongo
+      
   mongo:
     image: "mongo:latest"
     container_name: mongodb

@@ -1,30 +1,33 @@
 FROM openjdk:11-jre-slim
-LABEL maintainer "Azunna Ikonne <ikonne@gmail.com>"
+LABEL maintainer "Azunna Ikonne <ikonnea@gmail.com>"
 
 # Perform package upgrades and set timezone
+# hadolint ignore=DL3008
 RUN useradd --create-home openrasp \
-    && apt update \
-    && apt upgrade -y \
-    && apt install wget tar curl -y \
+    && apt-get update \
+    && apt-get install --no-install-recommends wget tar curl -y \
+    && rm /var/lib/apt/lists/* \
     && echo "Africa/Lagos" > /etc/timezone \
     && rm -f /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata
 
 
-RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.tar.gz \
-    && tar -xvf rasp-cloud.tar.gz \
-    && rm rasp-cloud.tar.gz \
-    && mv rasp* rasp
+# RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.tar.gz \
+#     && tar -xvf rasp-cloud.tar.gz \
+#     && rm rasp-cloud.tar.gz \
+#     && mv rasp* rasp
+COPY rasp-cloud-2020-09-04 rasp
 
 WORKDIR /rasp
 RUN mv conf/app.conf conf/app.conf.save
 COPY start.sh start.sh    
-COPY wait-for-it.sh wait-for-it.sh
-RUN chmod +x start.sh wait-for-it.sh && chown -hR openrasp /rasp
+COPY rasp-cloud.sh /etc/init.d/rasp-cloud.sh
+RUN chmod +x start.sh /etc/init.d/rasp-cloud.sh && chown -hR openrasp /rasp
 
 EXPOSE 8086
 
 # Make sure container runs as a non-root user
 USER openrasp
 
-HEALTHCHECK CMD curl --fail http://localhost:8086/ || exit 1
+HEALTHCHECK  --interval=30s --timeout=5s \
+    CMD curl --fail http://localhost:8086/ || exit 1 
