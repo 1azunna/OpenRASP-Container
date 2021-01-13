@@ -11,12 +11,12 @@ RUN useradd --create-home openrasp \
     && rm -f /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata
 
+# hadolint ignore=DL3020
+ADD "https://github.com/1azunna/openrasp-english/releases/download/v1.3.5/rasp-cloud.tar.gz" .
 
-# RUN wget https://github.com/baidu/openrasp/releases/download/v1.3.5/rasp-cloud.tar.gz \
-#     && tar -xvf rasp-cloud.tar.gz \
-#     && rm rasp-cloud.tar.gz \
-#     && mv rasp* rasp
-COPY rasp-cloud-2020-09-04 rasp
+RUN tar -xvf rasp-cloud.tar.gz \
+    && rm rasp-cloud.tar.gz \
+    && mv rasp* /rasp
 
 WORKDIR /rasp
 RUN mv conf/app.conf conf/app.conf.save
