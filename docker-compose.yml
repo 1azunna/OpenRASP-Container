@@ -42,10 +42,6 @@ services:
     hostname: mongodb
     env_file:
       - .env
-    environment:
-            MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-            MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
     volumes:
       - ./mongodb/create-user.sh:/docker-entrypoint-initdb.d/create-user.sh
       - ./mongodb/mongod.conf:/etc/mongod.conf
