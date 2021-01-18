@@ -1,5 +1,5 @@
 FROM openjdk:11-jre-slim
-LABEL maintainer "Azunna Ikonne <ikonnea@gmail.com>"
+LABEL maintainer "Azunna Ikonne <ikonnea@gmail.com>" 
 
 # Perform package upgrades and set timezone
 # hadolint ignore=DL3008
@@ -8,7 +8,7 @@ RUN useradd --create-home openrasp \
     && apt-get install --no-install-recommends wget tar curl -y \
     && rm /var/lib/apt/lists/* \
     && echo "Africa/Lagos" > /etc/timezone \
-    && rm -f /etc/localtime \
+    && rm -rf /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata
 
 # hadolint ignore=DL3020
