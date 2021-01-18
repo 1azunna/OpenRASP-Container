@@ -3,7 +3,7 @@ LABEL maintainer "Azunna Ikonne <ikonnea@gmail.com>"
 
 # Perform package upgrades and set timezone
 # hadolint ignore=DL3008
-RUN adduser -h openrasp \
+RUN adduser -h -D openrasp \
     && apk update \
     && apk add --no-cache wget=1.21.1-r1 tar=1.33-r1 curl=7.74.0-r0 \
     && rm -rf /var/cache/apk/* 
