@@ -1,4 +1,4 @@
-FROM alpine:3.13
+FROM alpine:3.10
 LABEL maintainer "Azunna Ikonne <ikonnea@gmail.com>" 
 
 # Perform package upgrades and set timezone
