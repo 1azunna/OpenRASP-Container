@@ -6,7 +6,7 @@ LABEL maintainer "Azunna Ikonne <ikonnea@gmail.com>"
 RUN useradd --create-home openrasp \
     && apt-get update \
     && apt-get install --no-install-recommends wget tar curl -y \
-    && rm /var/lib/apt/lists/* \
+    && rm -rf /var/lib/apt/lists/* \
     && echo "Africa/Lagos" > /etc/timezone \
     && rm -rf /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata
