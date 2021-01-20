@@ -1,11 +1,11 @@
-FROM alpine:3.10
+FROM alpine:3.13
 LABEL maintainer "Azunna Ikonne <ikonnea@gmail.com>" 
 
 # Perform package upgrades and set timezone
 # hadolint ignore=DL3008
 RUN adduser -D openrasp \
     && apk update \
-    && apk add --no-cache wget tar curl \
+    && apk add --no-cache wget=1.21.1-r1 tar=1.33-r1 curl=7.74.0-r0 \
     && rm -rf /var/cache/apk/* 
 
 # hadolint ignore=DL3020
