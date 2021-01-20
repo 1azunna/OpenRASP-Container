@@ -12,7 +12,7 @@ services:
     tty: true
     depends_on:
       - elasticsearch
-    entrypoint: ["/bin/bash", "start.sh"]
+    entrypoint: ["/bin/sh", "start.sh"]
     links:
       - elasticsearch
       - mongo
