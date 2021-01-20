@@ -1,6 +1,6 @@
 #!/bin/bash
 set -x
 
-/bin/bash /etc/init.d/rasp-cloud.sh start
+/bin/sh /etc/init.d/rasp-cloud.sh start
 
-/bin/bash
+/bin/sh
